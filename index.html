@@ -44,7 +44,8 @@
     e.preventDefault();
 
     // 入力内容を取得する
-    name = document.querySelector("nm");
+    var namej = document.querySelector("nm");
+    name = namej.value;
     if( msg.value === "" ){
       return(false);
     }
