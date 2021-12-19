@@ -1,0 +1,224 @@
+<html>
+<head>
+  <title>DeviceMotion Test</title>
+</head>
+<body>
+  <form id="name-setting">
+    <input type="text" id="nm">
+    <button>名前を設定</button>
+  </form>
+  <div><button onClick="deviceMotionRequest_test()">加速度測定Click</button><br></div>
+  <div id="test_acc"></div>
+  <div><button onClick="deviceMotionRequest()">サイリウムClick</button><br></div>
+  <p id="Terminal"></p>
+
+
+  <div id="result_acc"></div>
+  <br />
+  <div id="result_gyro"></div>
+  <br />
+  <div id="shake_count"></div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+
+  const socket = io();
+  var normal_cnt = 0;
+  var kecak_cnt = 0;
+  var m_cnt = 0;
+  var pick = 0;
+  var bool = 0;
+  var max = 50.00;
+  var tmax = 0;
+  var m = 0;
+  var array_x = new Array(60);
+  var array_y = new Array(60);
+  var array_z = new Array(60);
+  var name = "";
+
+  var ta = document.getElementById('Terminal')
+  var msg = "使用機種:"
+  var ut = navigator.userAgent;
+
+  document.querySelector("#name-setting").addEventListener("submit", (e)=>{
+    // 規定の送信処理をキャンセル(画面遷移しないなど)
+    e.preventDefault();
+
+    // 入力内容を取得する
+    name = document.querySelector("#nm");
+    if( msg.value === "" ){
+      return(false);
+    }
+  });
+
+  if(ut.indexOf('iPhone') > 0 || ut.indexOf('iPod') > 0 || ut.indexOf('iPad') > 0){
+    msg+=":ios";
+  }else if(ut.indexOf('Android') > 0 ||ut.indexOf('Android') > 0 && ut.indexOf('Mobile') > 0){
+    msg+="android";
+  }else{
+    msg+="PC";
+  }
+
+  ta.textContent = msg;
+
+  var s = new String("");
+  const countUp = () => {
+    pick = m_cnt;
+  }
+  setInterval(countUp, 1000);
+  function deviceMotionRequest_test () {
+    if (DeviceMotionEvent.requestPermission) {
+      DeviceMotionEvent.requestPermission()
+      .then(permissionState => {
+        if (permissionState === 'granted') {
+          window.addEventListener( "devicemotion", function( event ){
+            var tx = event.accelerationIncludingGravity.x;
+            var ty = event.accelerationIncludingGravity.y;
+            var tz = event.accelerationIncludingGravity.z;
+
+            if(msg.indexOf('ios')>0){
+              if(tmax > tx){
+                tmax = tx;
+              }
+            }else{
+              if(tmax < tx){
+                tmax = tx;
+              }
+            }
+            var test1 = document.getElementById( "test_acc" );
+            test1.innerHTML = "重力加速度<br />" +
+            "X：" + tx.toFixed(2) +"(m/s^2)<br />" +
+            "Y：" + ty.toFixed(2) +"(m/s^2)<br />" +
+            "Z：" + tz.toFixed(2) +"(m/s^2)<br /><br />" +
+            "tmax：" + tmax+"<br />" ;
+
+          });
+        }
+      })
+    }else{
+      window.addEventListener( "devicemotion", function( event ){
+        var tx = event.accelerationIncludingGravity.x;
+        var ty = event.accelerationIncludingGravity.y;
+        var tz = event.accelerationIncludingGravity.z;
+
+        if(msg.indexOf('ios')>0){
+          if(tmax > tx){
+            tmax = tx;
+          }
+        }else{
+          if(tmax < tx){
+            tmax = tx;
+          }
+        }
+
+        var test1 = document.getElementById( "test_acc" );
+        test1.innerHTML = "重力加速度<br />" +
+        "X：" + tx +"(m/s^2)<br />" +
+        "Y：" + ty +"(m/s^2)<br />" +
+        "Z：" + tz +"(m/s^2)<br /><br />" +
+        "tmax：" + tmax+"<br />" ;
+      });
+    }
+  }
+  function deviceMotionRequest () {
+    if (DeviceMotionEvent.requestPermission) {
+      DeviceMotionEvent.requestPermission()
+      .then(permissionState => {
+        if (permissionState === 'granted') {
+          window.addEventListener( "devicemotion", function( event ){
+            var x = event.accelerationIncludingGravity.x;
+            var y = event.accelerationIncludingGravity.y;
+            var z = event.accelerationIncludingGravity.z;
+            array_x[m_cnt%60] = x;
+            array_y[m_cnt%60] = y;
+            array_z[m_cnt%60] = z;
+
+            m_cnt ++;
+            max = Math.abs(tmax) * 0.75;
+            if(Math.abs(x) > max && bool == 0){
+              normal_cnt ++;
+              socket.emit("shake",name);
+              if(x > max){
+                s += "+";
+              }else if(x < -max){
+                s += "-";
+              }
+              bool = 1;
+            }
+            socket.on("member-shake", (name)=>{
+              var shakeresult = document.getElementById( "shake_count" );
+              shakeresult.innerHTML = name + "が振った!<br />"
+            });
+            if(Math.abs(x) <= max && bool == 1){
+              bool = 0;
+            }
+
+            var result1 = document.getElementById( "result_acc" );
+            result1.innerHTML = "重力加速度<br />" +
+            "X：" + x.toFixed(2) +"(m/s^2)<br />" +
+            "Y：" + y.toFixed(2) +"(m/s^2)<br />" +
+            "Z：" + z.toFixed(2) +"(m/s^2)<br /><br />" +
+            "max：" + max+"<br />" +
+            "振った回数(normal): " + normal_cnt +"回"+"!"+s+"!<br />" +
+            "振った回数(kecak): " + kecak_cnt +"回"+"<br />" +
+            "更新回数:" + pick;
+          });
+
+
+          window.addEventListener( "deviceorientation", function( event ) {
+            var alpha = event.alpha;
+            var beta = event.beta;
+            var gamma = event.gamma;
+
+            var result2 = document.getElementById( "result_gyro" );
+            result2.innerHTML = "ジャイロセンサー<br />" +
+            "alpha：" + alpha.toFixed(2) +"°<br />" +
+            "beta ：" + beta.toFixed(2)  +"°<br />" +
+            "gamma：" + gamma.toFixed(2) +"°<br />";
+          }, false)
+        }
+      })
+      .catch(console.error);
+    } else {
+      window.addEventListener( "devicemotion", function( event ){
+        var x = event.accelerationIncludingGravity.x;
+        var y = event.accelerationIncludingGravity.y;
+        var z = event.accelerationIncludingGravity.z;
+        array_x[m_cnt%60] = x;
+        array_y[m_cnt%60] = y;
+        array_z[m_cnt%60] = z;
+        m_cnt ++;
+        max = Math.abs(tmax) * 0.75;
+        if(Math.abs(x) > max && bool == 0){
+          normal_cnt ++;
+          socket.emit("shake",name);
+          if(x > max){
+            s += "+";
+          }else if(x < -max){
+            s += "-";
+          }
+          bool = 1;
+        }
+
+        socket.on("member-shake", (name)=>{
+          var shakeresult = document.getElementById( "shake_count" );
+          shakeresult.innerHTML = name + "が振った!<br />"
+        });
+
+        if(Math.abs(x) <= max && bool == 1){
+          bool = 0;
+        }
+
+        var result1 = document.getElementById( "result_acc" );
+        result1.innerHTML = "重力加速度<br />" +
+        "X：" + x +"(m/s^2)<br />" +
+        "Y：" + y+"(m/s^2)<br />" +
+        "Z：" + z +"(m/s^2)<br /><br />" +
+        "振った回数: " + normal_cnt +"回"+"!"+s+"!<br />" +
+        "更新回数:" + pick;
+      });
+    }
+  }
+
+  </script>
+  </body>
+  </html>
