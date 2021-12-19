@@ -39,12 +39,12 @@
   var msg = "使用機種:"
   var ut = navigator.userAgent;
 
-  document.querySelector("name-setting").addEventListener("submit", (e)=>{
+  document.querySelector("#name-setting").addEventListener("submit", (e)=>{
     // 規定の送信処理をキャンセル(画面遷移しないなど)
     e.preventDefault();
 
     // 入力内容を取得する
-    name = document.getElementById("nm");
+    name = document.getElementById("#nm");
   });
 
   if(ut.indexOf('iPhone') > 0 || ut.indexOf('iPod') > 0 || ut.indexOf('iPad') > 0){
@@ -143,7 +143,7 @@
             }
             socket.on("member-shake", (name)=>{
               var shakeresult = document.getElementById( "shake_count" );
-              shakeresult.innerHTML = name + "が振った!<br />"
+              shakeresult.innerHTML = `${name.text}`; + "が振った!<br />"
             });
             if(Math.abs(x) <= max && bool == 1){
               bool = 0;
@@ -198,7 +198,7 @@
 
         socket.on("member-shake", (name)=>{
           var shakeresult = document.getElementById( "shake_count" );
-          shakeresult.innerHTML = name + "が振った!<br />"
+          shakeresult.innerHTML = `${name.text}` + "が振った!<br />"
         });
 
         if(Math.abs(x) <= max && bool == 1){
