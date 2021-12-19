@@ -44,11 +44,7 @@
     e.preventDefault();
 
     // 入力内容を取得する
-    var namej = document.querySelector("nm");
-    name = namej.value;
-    if( msg.value === "" ){
-      return(false);
-    }
+    name = document.getElementById("nm");
   });
 
   if(ut.indexOf('iPhone') > 0 || ut.indexOf('iPod') > 0 || ut.indexOf('iPad') > 0){
