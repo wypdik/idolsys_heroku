@@ -44,7 +44,7 @@
     e.preventDefault();
 
     // 入力内容を取得する
-    name = document.querySelector("#nm");
+    name = document.querySelector("nm");
     if( nm.value === "" ){
       return(false);
     }
@@ -136,7 +136,7 @@
             max = Math.abs(tmax) * 0.75;
             if(Math.abs(x) > max && bool == 0){
               normal_cnt ++;
-              socket.emit("shake",{text:　nm.value});
+              socket.emit("shake",nm.value);
               if(x > max){
                 s += "+";
               }else if(x < -max){
@@ -146,7 +146,7 @@
             }
             socket.on("member-shake", (nm)=>{
               var shakeresult = document.getElementById( "shake_count" );
-              shakeresult.innerHTML = `${nm.text}`; + "が振った!<br />"
+              shakeresult.innerHTML = nm + "が振った!<br />"
             });
             if(Math.abs(x) <= max && bool == 1){
               bool = 0;
