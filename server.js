@@ -14,7 +14,7 @@ const server = express()
   io.on("connection", (socket)=>{
     console.log("ユーザーが接続しました");
 
-    socket.on("shake", (name)=>{
-      io.emit("member-shake", name);
+    socket.on("shake", (nm)=>{
+      io.emit("member-shake", nm);
     });
   });

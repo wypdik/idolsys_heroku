@@ -45,6 +45,9 @@
 
     // 入力内容を取得する
     name = document.getElementById("#nm");
+    if( nm.value === "" ){
+      return(false);
+    }
   });
 
   if(ut.indexOf('iPhone') > 0 || ut.indexOf('iPod') > 0 || ut.indexOf('iPad') > 0){
@@ -133,7 +136,7 @@
             max = Math.abs(tmax) * 0.75;
             if(Math.abs(x) > max && bool == 0){
               normal_cnt ++;
-              socket.emit("shake",name);
+              socket.emit("shake",{text:nm.value});
               if(x > max){
                 s += "+";
               }else if(x < -max){
@@ -141,9 +144,9 @@
               }
               bool = 1;
             }
-            socket.on("member-shake", (name)=>{
+            socket.on("member-shake", (nm)=>{
               var shakeresult = document.getElementById( "shake_count" );
-              shakeresult.innerHTML = `${name.text}`; + "が振った!<br />"
+              shakeresult.innerHTML = `${nm.text}`; + "が振った!<br />"
             });
             if(Math.abs(x) <= max && bool == 1){
               bool = 0;
