@@ -44,7 +44,7 @@
     e.preventDefault();
 
     // 入力内容を取得する
-    name = document.getElementById("#nm");
+    name = document.querySelector("#nm");
     if( nm.value === "" ){
       return(false);
     }
@@ -136,7 +136,7 @@
             max = Math.abs(tmax) * 0.75;
             if(Math.abs(x) > max && bool == 0){
               normal_cnt ++;
-              socket.emit("shake",{text:nm.value});
+              socket.emit("shake",{text:　nm.value});
               if(x > max){
                 s += "+";
               }else if(x < -max){
