@@ -147,15 +147,16 @@
               }
               bool = 1;
             }
-            socket.on("member-shake", (nm)=>{
-              const list = document.querySelector("shake_list");
-              const li = document.createElement("li");
-              li.innerHTML = nm + "が振った！";
-              list.insertBefore(li, list.firstChild);
-            });
+
             if(Math.abs(x) <= max && bool == 1){
               bool = 0;
             }
+            socket.on("member-shake", (nm)=>{
+              const ul = document.getElementById('shake_list');
+              const li = document.createElement("li");
+              li.appendChild(nm + "が振った！");
+              ul.appendChild(li);
+            });
 
             var result1 = document.getElementById( "result_acc" );
             result1.innerHTML = "重力加速度<br />" +
@@ -204,17 +205,18 @@
           bool = 1;
         }
 
-        socket.on("member-shake", (nm)=>{
-          const list = document.querySelector("shake_list");
-          const li = document.createElement("li");
-          li.innerHTML = nm + "が振った！";
-          list.insertBefore(li, list.firstChild);
-        });
-
 
         if(Math.abs(x) <= max && bool == 1){
           bool = 0;
         }
+
+        socket.on("member-shake", (nm)=>{
+          const ul = document.getElementById('shake_list');
+          const li = document.createElement("li");
+          li.appendChild(nm + "が振った！");
+          ul.appendChild(li);
+        });
+
 
         var result1 = document.getElementById( "result_acc" );
         result1.innerHTML = "重力加速度<br />" +
