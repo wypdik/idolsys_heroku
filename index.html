@@ -61,6 +61,7 @@
   ta.textContent = msg;
 
   var s = new String("");
+  var name_s == new String("");
   const countUp = () => {
     pick = m_cnt;
   }
@@ -146,7 +147,8 @@
             }
             socket.on("member-shake", (nm)=>{
               var shakeresult = document.getElementById( "shake_count" );
-              shakeresult.innerHTML = nm + "が振った!<br />"
+              name_s += nm + "が振った!<br />";
+              shakeresult.innerHTML = name_s;
             });
             if(Math.abs(x) <= max && bool == 1){
               bool = 0;
@@ -201,7 +203,8 @@
 
         socket.on("member-shake", (nm)=>{
           var shakeresult = document.getElementById( "shake_count" );
-          shakeresult.innerHTML = nm + "が振った!<br />"
+          name_s += nm + "が振った!<br />";
+          shakeresult.innerHTML = name_s;
         });
 
         if(Math.abs(x) <= max && bool == 1){
