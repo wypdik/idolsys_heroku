@@ -154,7 +154,8 @@
             socket.on("member-shake", (nm)=>{
               const ul = document.getElementById('shake_list');
               const li = document.createElement("li");
-              li.appendChild(nm + "が振った！");
+              const text = document.createTextNode(nm + "が振った！");
+              li.appendChild(text);
               ul.appendChild(li);
             });
 
@@ -211,9 +212,10 @@
         }
 
         socket.on("member-shake", (nm)=>{
-          const ul = document.getElementById('shake_list');
+          cconst ul = document.getElementById('shake_list');
           const li = document.createElement("li");
-          li.appendChild(nm + "が振った！");
+          const text = document.createTextNode(nm + "が振った！");
+          li.appendChild(text);
           ul.appendChild(li);
         });
 
