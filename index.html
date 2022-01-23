@@ -212,7 +212,7 @@
         }
 
         socket.on("member-shake", (nm)=>{
-          cconst ul = document.getElementById('shake_list');
+          const ul = document.getElementById('shake_list');
           const li = document.createElement("li");
           const text = document.createTextNode(nm + "が振った！");
           li.appendChild(text);
