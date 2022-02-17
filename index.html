@@ -3,6 +3,11 @@
   <title>DeviceMotion Test</title>
 </head>
 <body>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/pWVGiSZd1K8" id = "videoid" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <form id="url-setting">
+    <input type="text" id="vd">
+    <button>YouTubeURLを入力</button>
+  </form>
   <form id="name-setting">
     <input type="text" id="nm">
     <button>名前を設定</button>
@@ -35,10 +40,25 @@
   var array_y = new Array(60);
   var array_z = new Array(60);
   var name = "";
+  var url_id =  "";
 
   var ta = document.getElementById('Terminal')
   var msg = "使用機種:"
   var ut = navigator.userAgent;
+
+
+  document.querySelector("#url_setting").addEventListener("submit", (e)=>{
+    // 規定の送信処理をキャンセル(画面遷移しないなど)
+    e.preventDefault();
+
+    if( vd.value === "" ){
+      return(false);
+    }
+    url_id = document.querySelector("vd");
+    var video_url = document.getElementById('videoid');
+    var src = myimage.getAttribute('src');
+    myimage.setAttribute('src', url_id);
+  });
 
   document.querySelector("#name-setting").addEventListener("submit", (e)=>{
     // 規定の送信処理をキャンセル(画面遷移しないなど)
