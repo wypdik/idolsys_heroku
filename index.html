@@ -57,8 +57,8 @@
     url_id = document.querySelector("vd");
     var video_url = document.getElementById('videoid');
     if (!video_url){ return false;}
-    console.log('https://www.youtube.com/embed/' + url_id)
-    video_url.setAttribute('src', 'https://www.youtube.com/embed/' + url_id);
+    console.log('https://www.youtube.com/embed/' + vd.value)
+    video_url.setAttribute('src', 'https://www.youtube.com/embed/' + vd.value);
   });
 
   document.querySelector("#name-setting").addEventListener("submit", (e)=>{
