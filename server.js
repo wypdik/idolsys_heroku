@@ -10,6 +10,8 @@ const server = express()
   .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
+  server.use(express.static(__dirname + '/public'));
+
   const io = socketIO(server);
 
   io.on("connection", (socket)=>{
