@@ -1,20 +1,51 @@
-const express = require('express');
-const socketIO = require('socket.io');
+const crypto = require('crypto');
+const app = require('express')();
+const http = require("http").createServer(app);
+const socketIO = require('socket.io')(http);
 
-const PORT = process.env.PORT || 3000;
-const INDEX = '/index.html';
-var test = 0;
+// HTMLやJSなどを配置するディレクトリ
+const DOCUMENT_ROOT = __dirname + "/public";
 
-const server = express()
-  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
-  .listen(PORT, () => console.log(`Listening on ${PORT}`));
+app.get("/", (req, res)=>{
+  res.sendFile(DOCUMENT_ROOT + "/index.html");
+});
+app.get("/:file", (req, res)=>{
+  res.sendFile(DOCUMENT_ROOT + "/" + req.params.file);
+});
 
-  const io = socketIO(server);
 
-  io.on("connection", (socket)=>{
-    console.log("ユーザーが接続しました");
+const io = socketIO(http);
 
-    socket.on("shake", (nm)=>{
-      io.emit("member-shake", nm);
-    });
+io.on("connection", (socket)=>{
+  console.log("ユーザーが接続しました");
+
+  //---------------------------------
+  // ログイン
+  //---------------------------------
+  (()=>{
+    // トークンを作成
+    const token = makeToken(socket.id);
+
+    // 本人にトークンを送付
+    io.to(socket.id).emit("token", {token:token});
+  })();
+
+  socket.on("shake", (nm)=>{
+    io.emit("member-shake", nm);
   });
+});
+
+http.listen(3000, ()=>{
+  console.log("listening on *:3000");
+});
+
+/**
+* トークンを作成する
+*
+* @param  {string} id - socket.id
+* @return {string}
+*/
+function makeToken(id){
+  const str = "aqwsedrftgyhujiko" + id;
+  return( crypto.createHash("sha1").update(str).digest('hex') );
+}
