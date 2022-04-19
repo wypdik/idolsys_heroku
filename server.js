@@ -1,7 +1,7 @@
 const crypto = require('crypto');
 const app = require('express')();
 const http = require("http").createServer(app);
-const socketIO = require('socket.io')(http);
+const io = require('socket.io')(http);
 
 // HTMLやJSなどを配置するディレクトリ
 const DOCUMENT_ROOT = __dirname + "/public";
@@ -13,8 +13,6 @@ app.get("/:file", (req, res)=>{
   res.sendFile(DOCUMENT_ROOT + "/" + req.params.file);
 });
 
-
-const io = socketIO(http);
 
 io.on("connection", (socket)=>{
   console.log("ユーザーが接続しました");
