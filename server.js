@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 var http = require('http').Server(app);
-const socketIO = require('socket.io')(http);
+const io = require('socket.io')(http);
 
 const PORT = process.env.PORT || 3000;
 const INDEX = '/index.html';
@@ -17,7 +17,6 @@ app.get('/', function(request, response) {
 app.listen(app.get('port'), function() {
   console.log('listening on *:' + app.get('port'));
 });
-  const io = socketIO(http);
 
   io.on("connection", (socket)=>{
     console.log("ユーザーが接続しました");
