@@ -65,6 +65,7 @@
   var array_z = new Array(60);
   var name = "";
   var url_id =  "";
+  const ttoken;
 
   var ta = document.getElementById('Terminal')
   var msg = "使用機種:"
@@ -106,9 +107,14 @@
 
   ta.textContent = msg;
 
+
   var s = new String("");
   var name_s = new String("");
   var shake_judge_bool = 0;
+
+  socket.on("token", (data)=>{
+  ttoken = data.token;
+});
   function deviceMotionRequest_test () {
     if (DeviceMotionEvent.requestPermission) {
       DeviceMotionEvent.requestPermission()
@@ -133,7 +139,8 @@
             "X：" + tx.toFixed(2) +"(m/s^2)<br />" +
             "Y：" + ty.toFixed(2) +"(m/s^2)<br />" +
             "Z：" + tz.toFixed(2) +"(m/s^2)<br /><br />" +
-            "tmax：" + tmax+"<br />" ;
+            "tmax：" + tmax+"<br />" +
+            "id =" + token + "<br />";
 
           });
         }
@@ -180,7 +187,7 @@
             max = Math.abs(tmax) * 0.75;
             if(Math.abs(x) > max && bool == 0){
               normal_cnt ++;
-              socket.emit("shake",nm.value);
+              socket.emit("shake",nm.value,ttoken);
               if(x > max){
                 s += "+";
               }else if(x < -max){
@@ -192,10 +199,15 @@
             if(Math.abs(x) <= max && bool == 1){
               bool = 0;
             }
-            socket.on("member-shake", (nm)=>{
+            socket.on("member-shake", (nm,token)=>{
               const ul = document.getElementById('shake_list');
               const li = document.createElement("li");
-              const text = document.createTextNode(nm + "が振った！");
+              if(ttoken === token){
+                const text = document.createTextNode("自分が振った！");
+              }else{
+                const text = document.createTextNode(nm + "が振った！");
+              }
+              
               li.appendChild(text);
               ul.appendChild(li);
             });
