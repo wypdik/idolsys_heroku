@@ -113,8 +113,8 @@
   var shake_judge_bool = 0;
 
   socket.on("token", (data)=>{
-  ttoken = data.token;
-});
+    ttoken = data.token;
+  });
   function deviceMotionRequest_test () {
     if (DeviceMotionEvent.requestPermission) {
       DeviceMotionEvent.requestPermission()
@@ -167,7 +167,7 @@
         "Y：" + ty +"(m/s^2)<br />" +
         "Z：" + tz +"(m/s^2)<br /><br />" +
         "tmax：" + tmax+"<br />" +
-       "id =" + ttoken + "<br />";
+        "id =" + ttoken + "<br />";
       });
     }
   }
@@ -204,9 +204,9 @@
               const ul = document.getElementById('shake_list');
               const li = document.createElement("li");
               if(ttoken === token){
-                const text = document.createTextNode("自分が振った！");
+                var text = document.createTextNode("自分が振った！");
               }else{
-                const text = document.createTextNode(nm + "が振った！");
+                var text = document.createTextNode(nm + "が振った！");
               }
 
               li.appendChild(text);
@@ -269,9 +269,9 @@
           const ul = document.getElementById('shake_list');
           const li = document.createElement("li");
           if(ttoken === token){
-            const text = document.createTextNode("自分が振った！");
+            var text = document.createTextNode("自分が振った！");
           }else{
-            const text = document.createTextNode(nm + "が振った！");
+            var text = document.createTextNode(nm + "が振った！");
           }
           li.appendChild(text);
           ul.appendChild(li);
