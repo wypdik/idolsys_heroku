@@ -23,7 +23,7 @@ io.on("connection", (socket)=>{
     io.to(socket.id).emit("token", {token:token});
   })();
   socket.on("shake", (nm,ttoken)=>{
-    io.emit("member-shake", (nm,ttoken);
+    io.emit("member-shake", nm,ttoken);
   });
 });
 
