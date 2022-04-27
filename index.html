@@ -265,10 +265,14 @@
           bool = 0;
         }
 
-        socket.on("member-shake", (nm)=>{
+        socket.on("member-shake", (nm,token)=>{
           const ul = document.getElementById('shake_list');
           const li = document.createElement("li");
-          const text = document.createTextNode(nm + "が振った！");
+          if(ttoken === token){
+            const text = document.createTextNode("自分が振った！");
+          }else{
+            const text = document.createTextNode(nm + "が振った！");
+          }
           li.appendChild(text);
           ul.appendChild(li);
         });
