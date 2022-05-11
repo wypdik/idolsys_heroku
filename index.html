@@ -25,7 +25,7 @@
   <div class="directring">
     <iframe width="560" height="315" src="https://www.youtube.com/embed/-YCqHSwWtWM" id = "videoid" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <div class="glowstick">
-      <img src="https://1.bp.blogspot.com/-DD0J8DE44Ew/VXOULxJvZiI/AAAAAAAAuHw/F7MmGW-8NWs/s800/cyalume_light5_orange.png">
+      <img id="cyalume",src="https://1.bp.blogspot.com/-DD0J8DE44Ew/VXOULxJvZiI/AAAAAAAAuHw/F7MmGW-8NWs/s800/cyalume_light5_orange.png">
     </div>
   </div>
   <form id="url-setting">
@@ -209,6 +209,9 @@
                 console.log(sendname);
                 var text = document.createTextNode(nm + "が振った！");
               }
+              document.querySelector("#cyalume").animate({
+                transform:["rotate(0)","rotate(90)"];
+              }
 
               li.appendChild(text);
               ul.appendChild(li);
@@ -275,6 +278,10 @@
             console.log(nm.value);
             console.log(sendname);
             var text = document.createTextNode(nm + "が振った！");
+          }
+
+          document.querySelector("#cyalume").animate({
+            transform:["rotate(0)","rotate(90)"];
           }
           li.appendChild(text);
           ul.appendChild(li);
