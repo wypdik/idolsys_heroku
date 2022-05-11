@@ -205,9 +205,7 @@
               if(nm.value === sendname){
                 var text = document.createTextNode("自分が振った！");
               }else{
-                console.log(nm.value);
-                console.log(sendname);
-                var text = document.createTextNode(nm + "が振った！");
+                var text = document.createTextNode(sendname + "が振った！");
               }
               document.querySelector("#cyalume").animate({
                 transform:["rotate(0)","rotate(90)"]
@@ -275,12 +273,10 @@
           if(nm.value === sendname){
             var text = document.createTextNode("自分が振った！");
           }else{
-            console.log(nm.value);
-            console.log(sendname);
-            var text = document.createTextNode(nm + "が振った！");
+            var text = document.createTextNode(sendname + "が振った！");
           }
 
-          document.querySelector("#cyalume").animate({
+          document.querySelector("cyalume").animate({
             transform:["rotate(0)","rotate(90)"]
           },3000);
           li.appendChild(text);
