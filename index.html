@@ -206,6 +206,8 @@
               if(name === nm){
                 var text = document.createTextNode("自分が振った！");
               }else{
+                console.log(nm);
+                console.log(name);
                 var text = document.createTextNode(nm + "が振った！");
               }
 
@@ -271,6 +273,8 @@
           if(nm === name){
             var text = document.createTextNode("自分が振った！");
           }else{
+            console.log(nm);
+            console.log(name);
             var text = document.createTextNode(nm + "が振った！");
           }
           li.appendChild(text);
