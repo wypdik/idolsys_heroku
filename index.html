@@ -268,7 +268,7 @@
         socket.on("member-shake", (nm,token)=>{
           const ul = document.getElementById('shake_list');
           const li = document.createElement("li");
-          if(ttoken === token){
+          if(nm === name){
             var text = document.createTextNode("自分が振った！");
           }else{
             var text = document.createTextNode(nm + "が振った！");
