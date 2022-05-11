@@ -90,9 +90,7 @@
     // 規定の送信処理をキャンセル(画面遷移しないなど)
     e.preventDefault();
 
-    // 入力内容を取得する
-    name = document.querySelector("#nm");
-    console.log(name.value);
+
     if( nm.value === "" ){
       return(false);
     }
@@ -201,14 +199,14 @@
             if(Math.abs(x) <= max && bool == 1){
               bool = 0;
             }
-            socket.on("member-shake", (nm,token)=>{
+            socket.on("member-shake", (sendname,token)=>{
               const ul = document.getElementById('shake_list');
               const li = document.createElement("li");
-              if(name === nm){
+              if(nm.value === sendname){
                 var text = document.createTextNode("自分が振った！");
               }else{
-                console.log(nm);
-                console.log(name);
+                console.log(nm.value);
+                console.log(sendname);
                 var text = document.createTextNode(nm + "が振った！");
               }
 
@@ -268,14 +266,14 @@
           bool = 0;
         }
 
-        socket.on("member-shake", (nm,token)=>{
+        socket.on("member-shake", (sendname,token)=>{
           const ul = document.getElementById('shake_list');
           const li = document.createElement("li");
-          if(nm === name){
+          if(nm.value === sendname){
             var text = document.createTextNode("自分が振った！");
           }else{
-            console.log(nm);
-            console.log(name);
+            console.log(nm.value);
+            console.log(sendname);
             var text = document.createTextNode(nm + "が振った！");
           }
           li.appendChild(text);
