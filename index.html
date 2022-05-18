@@ -67,6 +67,7 @@
   var member_name_array = [];
   var member_count = 0;
   var my_member_number = 0;
+  var name_push_count = 0;
   var url_id =  "";
   var ttoken = "";
 
@@ -97,13 +98,15 @@
     if( nm.value === "" ){
       return(false);
     }
-    my_member_number = member_count;
-    member_count ++;
-    var img_element = document.createElement('img');
-    img_element.src = 'https://1.bp.blogspot.com/-DD0J8DE44Ew/VXOULxJvZiI/AAAAAAAAuHw/F7MmGW-8NWs/s800/cyalume_light5_orange.png'; // 画像パス
-    var content_area = document.getElementById("glowstick_area");
-    content_area.appendChild(img_element);
-    
+    name_push_count ++;
+    if(name_push_count < 2){
+      my_member_number = member_count;
+      member_count ++;
+      var img_element = document.createElement('img');
+      img_element.src = 'https://1.bp.blogspot.com/-DD0J8DE44Ew/VXOULxJvZiI/AAAAAAAAuHw/F7MmGW-8NWs/s800/cyalume_light5_orange.png'; // 画像パス
+      var content_area = document.getElementById("glowstick_area");
+      content_area.appendChild(img_element);
+    }
   });
 
 
