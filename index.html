@@ -107,15 +107,7 @@
       var content_area = document.getElementById("glowstick_area");
       content_area.appendChild(img_element);
       socket.emit("name_sending",nm.value);
-      socket.on("member-name-sending", (nm_array)=>{
-        for(let i = 0; i < nm_array.length; i++){
-          console.log(nm_array);
-          var img_element = document.createElement('img');
-          img_element.src = 'https://1.bp.blogspot.com/-DD0J8DE44Ew/VXOULxJvZiI/AAAAAAAAuHw/F7MmGW-8NWs/s800/cyalume_light5_orange.png'; // 画像パス
-          img_element.id = "cyalume" + i;
-          var content_area = document.getElementById("glowstick_area");
-          content_area.appendChild(img_element);
-        }
+
       });
     }
   });
@@ -166,7 +158,15 @@
             "Z：" + tz.toFixed(2) +"(m/s^2)<br /><br />" +
             "tmax：" + tmax+"<br />" +
             "id =" + ttoken + "<br />";
-
+            socket.on("member-name-sending", (nm_array)=>{
+              for(let i = 0; i < nm_array.length; i++){
+                console.log(nm_array);
+                var img_element = document.createElement('img');
+                img_element.src = 'https://1.bp.blogspot.com/-DD0J8DE44Ew/VXOULxJvZiI/AAAAAAAAuHw/F7MmGW-8NWs/s800/cyalume_light5_orange.png'; // 画像パス
+                img_element.id = "cyalume" + i;
+                var content_area = document.getElementById("glowstick_area");
+                content_area.appendChild(img_element);
+              }
           });
         }
       })
@@ -193,6 +193,16 @@
         "Z：" + tz +"(m/s^2)<br /><br />" +
         "tmax：" + tmax+"<br />" +
         "id =" + ttoken + "<br />";
+
+        socket.on("member-name-sending", (nm_array)=>{
+          for(let i = 0; i < nm_array.length; i++){
+            console.log(nm_array);
+            var img_element = document.createElement('img');
+            img_element.src = 'https://1.bp.blogspot.com/-DD0J8DE44Ew/VXOULxJvZiI/AAAAAAAAuHw/F7MmGW-8NWs/s800/cyalume_light5_orange.png'; // 画像パス
+            img_element.id = "cyalume" + i;
+            var content_area = document.getElementById("glowstick_area");
+            content_area.appendChild(img_element);
+          }
       });
     }
   }
