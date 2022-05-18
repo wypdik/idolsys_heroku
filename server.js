@@ -5,7 +5,7 @@ const socketIO = require('socket.io');
 const PORT = process.env.PORT || 3000;
 const INDEX = '/index.html';
 var member_count_server = 0;
-var member_name_array = "";
+var member_name_array = [];
 
 const server = express()
 .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
@@ -26,6 +26,7 @@ io.on("connection", (socket)=>{
   })();
   socket.on("name_sending", (nm)=>{
     member_name_array[member_name_array.length] = nm;
+    console.log(nm);
     console.log("test");
     console.log(member_name_array);
     io.emit("member-name-sending", member_name_array);

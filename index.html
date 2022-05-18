@@ -26,7 +26,6 @@
   <div class="directring">
     <iframe width="560" height="315" src="https://www.youtube.com/embed/-YCqHSwWtWM" id = "videoid" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <div class="glowstick" id="glowstick_area">
-      <img id="cyalume" src="https://1.bp.blogspot.com/-DD0J8DE44Ew/VXOULxJvZiI/AAAAAAAAuHw/F7MmGW-8NWs/s800/cyalume_light5_orange.png">
     </div>
   </div>
   <form id="url-setting">
@@ -102,10 +101,6 @@
     if(name_push_count < 2){
       my_member_number = member_count;
       member_count ++;
-      var img_element = document.createElement('img');
-      img_element.src = 'https://1.bp.blogspot.com/-DD0J8DE44Ew/VXOULxJvZiI/AAAAAAAAuHw/F7MmGW-8NWs/s800/cyalume_light5_orange.png'; // 画像パス
-      var content_area = document.getElementById("glowstick_area");
-      content_area.appendChild(img_element);
       socket.emit("name_sending",nm.value);
 
     }
