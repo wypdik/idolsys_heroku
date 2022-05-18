@@ -26,6 +26,7 @@ io.on("connection", (socket)=>{
   })();
   socket.on("name_sending", (nm)=>{
     member_name_array[member_name_array.length] = nm;
+    console.log("test");
     io.emit("member-name-sending", member_name_array);
   });
   socket.on("shake", (nm,ttoken)=>{
