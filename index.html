@@ -20,6 +20,9 @@
     height: auto;
     transform-origin:bottom left;
   }
+  #cyalume0{
+    transform-origin:bottom left;
+  }
   </style>
 </head>
 <body>
@@ -239,9 +242,9 @@
               }else{
                 var text = document.createTextNode(sendname + "が振った！");
               }
-              document.querySelector(".glowstick").animate({
+              document.querySelector("#cyalume0").animate({
                 transform:["rotate(0)","rotate(45deg)"]
-              },3000);
+              },1000);
 
               li.appendChild(text);
               ul.appendChild(li);
