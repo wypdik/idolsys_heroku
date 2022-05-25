@@ -155,19 +155,20 @@
             "Z：" + tz.toFixed(2) +"(m/s^2)<br /><br />" +
             "tmax：" + tmax+"<br />" +
             "id =" + ttoken + "<br />";
-            socket.on("member-name-sending", (nm_array)=>{
-              console.log(nm_array);
-              for(let i = 0; i < nm_array.length; i++){
-                var img_element = document.createElement('img');
-                img_element.src = 'https://1.bp.blogspot.com/-DD0J8DE44Ew/VXOULxJvZiI/AAAAAAAAuHw/F7MmGW-8NWs/s800/cyalume_light5_orange.png'; // 画像パス
-                img_element.id = "cyalume" + i;
-                var content_area = document.getElementById("glowstick_area");
-                content_area.appendChild(img_element);
-              }
-            });
+
           });
         }
       })
+      socket.on("member-name-sending", (nm_array)=>{
+        console.log(nm_array);
+        for(let i = 0; i < nm_array.length; i++){
+          var img_element = document.createElement('img');
+          img_element.src = 'https://1.bp.blogspot.com/-DD0J8DE44Ew/VXOULxJvZiI/AAAAAAAAuHw/F7MmGW-8NWs/s800/cyalume_light5_orange.png'; // 画像パス
+          img_element.id = "cyalume" + i;
+          var content_area = document.getElementById("glowstick_area");
+          content_area.appendChild(img_element);
+        }
+      });
     }else{
       window.addEventListener( "devicemotion", function( event ){
         var tx = event.accelerationIncludingGravity.x;
@@ -192,16 +193,17 @@
         "tmax：" + tmax+"<br />" +
         "id =" + ttoken + "<br />";
 
-        socket.on("member-name-sending", (nm_array)=>{
-          console.log(nm_array);
-          for(let i = 0; i < nm_array.length; i++){
-            var img_element = document.createElement('img');
-            img_element.src = 'https://1.bp.blogspot.com/-DD0J8DE44Ew/VXOULxJvZiI/AAAAAAAAuHw/F7MmGW-8NWs/s800/cyalume_light5_orange.png'; // 画像パス
-            img_element.id = "cyalume" + i;
-            var content_area = document.getElementById("glowstick_area");
-            content_area.appendChild(img_element);
-          }
-        });
+
+      });
+      socket.on("member-name-sending", (nm_array)=>{
+        console.log(nm_array);
+        for(let i = 0; i < nm_array.length; i++){
+          var img_element = document.createElement('img');
+          img_element.src = 'https://1.bp.blogspot.com/-DD0J8DE44Ew/VXOULxJvZiI/AAAAAAAAuHw/F7MmGW-8NWs/s800/cyalume_light5_orange.png'; // 画像パス
+          img_element.id = "cyalume" + i;
+          var content_area = document.getElementById("glowstick_area");
+          content_area.appendChild(img_element);
+        }
       });
     }
   }
@@ -234,21 +236,7 @@
             if(Math.abs(x) <= max && bool == 1){
               bool = 0;
             }
-            socket.on("member-shake", (sendname,token)=>{
-              const ul = document.getElementById('shake_list');
-              const li = document.createElement("li");
-              if(nm.value === sendname){
-                var text = document.createTextNode("自分が振った！");
-              }else{
-                var text = document.createTextNode(sendname + "が振った！");
-              }
-              document.querySelector("#cyalume0").animate({
-                transform:["rotate(0)","rotate(45deg)"]
-              },1000);
 
-              li.appendChild(text);
-              ul.appendChild(li);
-            });
 
             var result1 = document.getElementById( "result_acc" );
             result1.innerHTML = "重力加速度<br />" +
@@ -276,6 +264,21 @@
         }
       })
       .catch(console.error);
+      socket.on("member-shake", (sendname,token)=>{
+        const ul = document.getElementById('shake_list');
+        const li = document.createElement("li");
+        if(nm.value === sendname){
+          var text = document.createTextNode("自分が振った！");
+        }else{
+          var text = document.createTextNode(sendname + "が振った！");
+        }
+        document.querySelector("#cyalume0").animate({
+          transform:["rotate(0)","rotate(45deg)"]
+        },1000);
+
+        li.appendChild(text);
+        ul.appendChild(li);
+      });
     } else {
       window.addEventListener( "devicemotion", function( event ){
         var x = event.accelerationIncludingGravity.x;
@@ -302,21 +305,7 @@
           bool = 0;
         }
 
-        socket.on("member-shake", (sendname,token)=>{
-          const ul = document.getElementById('shake_list');
-          const li = document.createElement("li");
-          if(nm.value === sendname){
-            var text = document.createTextNode("自分が振った！");
-          }else{
-            var text = document.createTextNode(sendname + "が振った！");
-          }
 
-          document.querySelector("#cyalume0").animate({
-            transform:["rotate(0)","rotate(45deg)"]
-          },1000);
-          li.appendChild(text);
-          ul.appendChild(li);
-        });
 
 
         var result1 = document.getElementById( "result_acc" );
@@ -326,6 +315,21 @@
         "Z：" + z +"(m/s^2)<br /><br />" +
         "振った回数: " + normal_cnt +"回"+"!"+s+"!<br />" +
         "更新回数:" + pick;
+      });
+      socket.on("member-shake", (sendname,token)=>{
+        const ul = document.getElementById('shake_list');
+        const li = document.createElement("li");
+        if(nm.value === sendname){
+          var text = document.createTextNode("自分が振った！");
+        }else{
+          var text = document.createTextNode(sendname + "が振った！");
+        }
+
+        document.querySelector("#cyalume0").animate({
+          transform:["rotate(0)","rotate(45deg)"]
+        },1000);
+        li.appendChild(text);
+        ul.appendChild(li);
       });
     }
   }
