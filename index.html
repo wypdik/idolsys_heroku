@@ -161,6 +161,7 @@
       })
       socket.on("member-name-sending", (nm_array)=>{
         console.log(nm_array);
+        member_name_array = nm_array;
         for(let i = 0; i < nm_array.length; i++){
           var img_element = document.createElement('img');
           img_element.src = 'https://1.bp.blogspot.com/-DD0J8DE44Ew/VXOULxJvZiI/AAAAAAAAuHw/F7MmGW-8NWs/s800/cyalume_light5_orange.png'; // 画像パス
@@ -197,6 +198,7 @@
       });
       socket.on("member-name-sending", (nm_array)=>{
         console.log(nm_array);
+        member_name_array = nm_array;
         for(let i = 0; i < nm_array.length; i++){
           var img_element = document.createElement('img');
           img_element.src = 'https://1.bp.blogspot.com/-DD0J8DE44Ew/VXOULxJvZiI/AAAAAAAAuHw/F7MmGW-8NWs/s800/cyalume_light5_orange.png'; // 画像パス
@@ -272,7 +274,7 @@
         }else{
           var text = document.createTextNode(sendname + "が振った！");
         }
-        document.querySelector("#cyalume0").animate({
+        document.querySelector("#cyalume" + member_name_array.indexOf(sendname)).animate({
           transform:["rotate(0)","rotate(45deg)"]
         },1000);
 
@@ -325,7 +327,7 @@
           var text = document.createTextNode(sendname + "が振った！");
         }
 
-        document.querySelector("#cyalume0").animate({
+        document.querySelector("#cyalume"+member_name_array.indexOf(sendname)).animate({
           transform:["rotate(0)","rotate(45deg)"]
         },1000);
         li.appendChild(text);
