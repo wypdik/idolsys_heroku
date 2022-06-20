@@ -29,7 +29,6 @@
   <div class="directring">
     <iframe width="560" height="315" src="https://www.youtube.com/embed/-YCqHSwWtWM" id = "videoid" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <div class="glowstick" id="glowstick_area">
-      <img id="cyalume0",src="">
     </div>
   </div>
   <form id="url-setting">
@@ -125,7 +124,7 @@
   let colorButton = document.getElementById('colorButton');
   colorButton.addEventListener('click', colorButtonClick);
   function colorButtonClick(){
-    socket.emit("color_sending",colorSelect.value,);
+    socket.emit("color_sending",colorSelect.value,my_member_number);
   }
 
   if(ut.indexOf('iPhone') > 0 || ut.indexOf('iPod') > 0 || ut.indexOf('iPad') > 0){
@@ -189,7 +188,7 @@
         }
       });
       socket.on("member-color-sending", (cl,nm)=>{
-        document.querySelector("#cyulume"+String(0)).src =color_srcs[cl];
+        document.querySelector("#cyalume"+String(0)).src =color_srcs[cl];
 
       });
     }else{
@@ -234,7 +233,7 @@
         console.log(cl);
         console.log(nm);
 
-        document.querySelector("#cyulume0").src =color_srcs[0];
+        document.querySelector("#cyalume"+nm).src =color_srcs[cl];
 
       });
     }
