@@ -187,11 +187,6 @@
           content_area.appendChild(img_element);
         }
       });
-      socket.on("member-color-sending", (cl,nm)=>{
-        var cl_img = document.getElementById("cyulume"+nm);
-        cl_img.src = color_srcs[cl];
-
-      });
     }else{
       window.addEventListener( "devicemotion", function( event ){
         var tx = event.accelerationIncludingGravity.x;
@@ -230,14 +225,7 @@
           content_area.appendChild(img_element);
         }
       });
-      socket.on("member-color-sending", (cl,nm)=>{
-        console.log(cl);
-        console.log(nm);
 
-        var cl_img = document.getElementById("cyulume"+nm);
-        cl_img.src = color_srcs[cl];
-
-      });
     }
   }
   function deviceMotionRequest () {
@@ -312,6 +300,14 @@
         li.appendChild(text);
         ul.appendChild(li);
       });
+      socket.on("member-color-sending", (cl,nm)=>{
+        console.log(cl);
+        console.log(nm);
+
+        var cl_img = document.getElementById("cyulume"+nm);
+        cl_img.src = color_srcs[cl];
+
+      });
     } else {
       window.addEventListener( "devicemotion", function( event ){
         var x = event.accelerationIncludingGravity.x;
@@ -363,6 +359,14 @@
         },1000);
         li.appendChild(text);
         ul.appendChild(li);
+      });
+      socket.on("member-color-sending", (cl,nm)=>{
+        console.log(cl);
+        console.log(nm);
+
+        var cl_img = document.getElementById("cyulume"+nm);
+        cl_img.src = color_srcs[cl];
+
       });
     }
   }
