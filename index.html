@@ -231,6 +231,9 @@
         }
       });
       socket.on("member-color-sending", (cl,nm)=>{
+        console.log(cl);
+        console.log(nm);
+
         var cl_img = document.getElementById("cyulume"+nm);
         cl_img.src = color_srcs[cl];
 
