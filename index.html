@@ -124,7 +124,7 @@
   let colorButton = document.getElementById('colorButton');
   colorButton.addEventListener('click', colorButtonClick);
   function colorButtonClick(){
-    socket.emit("color_sending",colorSelect.value,my_member_number);
+    socket.emit("color_sending",colorSelect.value,);
   }
 
   if(ut.indexOf('iPhone') > 0 || ut.indexOf('iPod') > 0 || ut.indexOf('iPad') > 0){
@@ -188,7 +188,7 @@
         }
       });
       socket.on("member-color-sending", (cl,nm)=>{
-        document.querySelector("#cyulume"+nm).src =color_srcs[cl];
+        document.querySelector("#cyulume"+0).src =color_srcs[cl];
 
       });
     }else{
@@ -233,7 +233,7 @@
         console.log(cl);
         console.log(nm);
 
-        document.querySelector("#cyulume"+nm).src =color_srcs[cl];
+        document.querySelector("#cyulume"+0).src =color_srcs[cl];
 
       });
     }
