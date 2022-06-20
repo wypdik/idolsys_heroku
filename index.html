@@ -188,7 +188,7 @@
         }
       });
       socket.on("member-color-sending", (cl,nm)=>{
-        var cl_img = document.getElementById("cyulume"+Number(nm));
+        var cl_img = document.querySelector("#cyulume"+nm);
         cl_img.setAttribute('src', color_srcs[cl]);
 
       });
@@ -234,7 +234,7 @@
         console.log(cl);
         console.log(nm);
 
-        var cl_img = document.getElementById("cyulume"+Number(nm));
+        var cl_img = document.querySelector("#cyulume"+nm);
         cl_img.setAttribute('src', color_srcs[cl]);
 
       });
