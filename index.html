@@ -52,6 +52,15 @@
   <br />
   <div id="shake_count"></div>
   <ul id="shake_list"></ul>
+  <label for="cyalume_color">サイリウムの色変更</label><br>
+  <select name="cyalume_color" size = 3 id="cyulume_color">
+    <option value="0">赤</option>
+    <option value="1">青</option>
+    <option value="2">白</option>
+  </select>
+  <div>
+    <input type="button" value="色を変更" id="colorButton">
+  </div>
   <script src="/socket.io/socket.io.js"></script>
   <script>
 
@@ -73,6 +82,7 @@
   var name_push_count = 0;
   var url_id =  "";
   var ttoken = "";
+  var color_srcs=["https://1.bp.blogspot.com/-7hB1oTHjr9g/VXOULBpPYMI/AAAAAAAAuH4/aYNT-uleQ4M/s800/cyalume_light3_red.png","https://2.bp.blogspot.com/-hs-TG5RsMDM/VXOUKAoAv9I/AAAAAAAAuHc/02HE_Cgxqf4/s800/cyalume_light1_blue.png","https://4.bp.blogspot.com/-F3huKwVR5eo/VXOUM3DEnGI/AAAAAAAAuIQ/o8-dyeSKZ7o/s800/cyalume_light7_white.png"];
 
   var ta = document.getElementById('Terminal')
   var msg = "使用機種:"
@@ -109,8 +119,13 @@
 
     }
   });
-
-
+  let colorSelect = document.getElementById('cyulume_color');
+  colorSelect.options[2].selected = true;
+  let colorButton = document.getElementById('colorButton');
+  colorButton.addEventListener('click', colorButtonClick);
+  function colorButtonClick(){
+    socket.emit("color_sending",colorSelect.value,my_member_number);
+  }
 
   if(ut.indexOf('iPhone') > 0 || ut.indexOf('iPod') > 0 || ut.indexOf('iPad') > 0){
     msg+=":ios";
@@ -172,6 +187,11 @@
           content_area.appendChild(img_element);
         }
       });
+      socket.on("member-color-sending", (cl,nm)=>{
+        var cl_img = document.getElementById("cyulume"+nm);
+        cl_img.src = color_srcs[cl];
+
+      });
     }else{
       window.addEventListener( "devicemotion", function( event ){
         var tx = event.accelerationIncludingGravity.x;
@@ -209,6 +229,11 @@
           var content_area = document.getElementById("glowstick_area");
           content_area.appendChild(img_element);
         }
+      });
+      socket.on("member-color-sending", (cl,nm)=>{
+        var cl_img = document.getElementById("cyulume"+nm);
+        cl_img.src = color_srcs[cl];
+
       });
     }
   }

@@ -31,6 +31,9 @@ io.on("connection", (socket)=>{
     console.log(member_name_array);
     io.emit("member-name-sending", member_name_array);
   });
+  socket.on("color_sending", (cl,nm)=>{
+    io.emit("member-color-sending", cl,nm);
+  });
   socket.on("shake", (nm,ttoken)=>{
     io.emit("member-shake", nm,ttoken);
   });
