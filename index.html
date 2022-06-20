@@ -82,7 +82,7 @@
   var name_push_count = 0;
   var url_id =  "";
   var ttoken = "";
-  var color_srcs=["https://1.bp.blogspot.com/-7hB1oTHjr9g/VXOULBpPYMI/AAAAAAAAuH4/aYNT-uleQ4M/s800/cyalume_light3_red.png","https://2.bp.blogspot.com/-hs-TG5RsMDM/VXOUKAoAv9I/AAAAAAAAuHc/02HE_Cgxqf4/s800/cyalume_light1_blue.png","https://4.bp.blogspot.com/-F3huKwVR5eo/VXOUM3DEnGI/AAAAAAAAuIQ/o8-dyeSKZ7o/s800/cyalume_light7_white.png"];
+  var color_srcs=['https://1.bp.blogspot.com/-7hB1oTHjr9g/VXOULBpPYMI/AAAAAAAAuH4/aYNT-uleQ4M/s800/cyalume_light3_red.png','https://2.bp.blogspot.com/-hs-TG5RsMDM/VXOUKAoAv9I/AAAAAAAAuHc/02HE_Cgxqf4/s800/cyalume_light1_blue.png','https://4.bp.blogspot.com/-F3huKwVR5eo/VXOUM3DEnGI/AAAAAAAAuIQ/o8-dyeSKZ7o/s800/cyalume_light7_white.png'];
 
   var ta = document.getElementById('Terminal')
   var msg = "使用機種:"
@@ -188,8 +188,7 @@
         }
       });
       socket.on("member-color-sending", (cl,nm)=>{
-        var cl_img = document.querySelector("#cyulume"+nm);
-        cl_img.setAttribute('src', color_srcs[cl]);
+        document.querySelector("#cyulume"+nm).src =color_srcs[cl];
 
       });
     }else{
@@ -234,8 +233,7 @@
         console.log(cl);
         console.log(nm);
 
-        var cl_img = document.querySelector("#cyulume"+nm);
-        cl_img.setAttribute('src', color_srcs[cl]);
+        document.querySelector("#cyulume"+nm).src =color_srcs[cl];
 
       });
     }
