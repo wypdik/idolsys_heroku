@@ -176,8 +176,8 @@
       })
       socket.on("member-name-sending", (nm_array,mb_cnt)=>{
         console.log(nm_array);
-        my_member_number = mb_cnt;
         member_name_array = nm_array;
+        my_member_number = member_name_array.indexOf(nm.value);
         document.querySelector('#glowstick_area').innerHTML = ``;
         for(let i = 0; i < nm_array.length; i++){
           var img_element = document.createElement('img');
@@ -219,7 +219,9 @@
       });
       socket.on("member-name-sending", (nm_array)=>{
         console.log(nm_array);
+
         member_name_array = nm_array;
+        my_member_number = member_name_array.indexOf(nm.value);
         document.querySelector('#glowstick_area').innerHTML = ``;
         for(let i = 0; i < nm_array.length; i++){
           var img_element = document.createElement('img');
