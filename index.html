@@ -188,7 +188,7 @@
         }
       });
       socket.on("member-color-sending", (cl,nm)=>{
-        document.querySelector("#cyalume"+String(0)).src =color_srcs[cl];
+        document.querySelector("#cyalume"+nm).src =color_srcs[cl];
 
       });
     }else{
