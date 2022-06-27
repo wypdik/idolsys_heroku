@@ -29,7 +29,7 @@ io.on("connection", (socket)=>{
     console.log(nm);
     console.log("test");
     console.log(member_name_array);
-    io.emit("member-name-sending", member_name_array);
+    io.emit("member-name-sending", member_name_array,member_count_server);
   });
   socket.on("color_sending", (cl,nm)=>{
     io.emit("member-color-sending", cl,nm);
