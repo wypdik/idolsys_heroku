@@ -16,9 +16,8 @@ const io = socketIO(server);
 
 io.on("connection", (socket)=>{
   member_count_server ++;
-  member_id_array[member_id_array.length]=socket.id;
-  console.log("ユーザーが接続しました");
 
+  console.log("ユーザーが接続しました");
   (()=>{
     // トークンを作成
     const token = makeToken(socket.id);
@@ -28,16 +27,20 @@ io.on("connection", (socket)=>{
   })();
   socket.on("name_sending", (nm)=>{
     member_name_array[member_name_array.length] = nm;
+    member_id_array[member_id_array.length]=socket.id;
     console.log(nm);
     console.log("test");
     console.log(member_name_array);
-    io.emit("member-name-sending", member_name_array,member_count_server);
+    io.emit("member-name-sending", member_name_array,member_count_server,member_id_array);
   });
   socket.on("color_sending", (cl,nm)=>{
     io.emit("member-color-sending", cl,nm);
   });
   socket.on("shake", (nm,ttoken)=>{
     io.emit("member-shake", nm,ttoken);
+  });
+  socket.on("disconnect",())=> {
+    io.emit("disconnecting",socket.id);
   });
 });
 
