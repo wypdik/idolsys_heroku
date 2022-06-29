@@ -318,7 +318,7 @@
         li.appendChild(text);
         ul.appendChild(li);
       });
-      socket.on("disconnecting",(id)=>{
+      socket.on("member_disconnect",(id)=>{
         var disconnect_id = member_id_array.indexOf(id);
         member_name_array.splice(disconnect_id,1);
         member_id_array.splice(disconnect_id,1);
@@ -383,7 +383,7 @@
         li.appendChild(text);
         ul.appendChild(li);
       });
-      socket.on("disconnecting",(id)=>{
+      socket.on("member_disconnect",(id)=>{
         var disconnect_id = member_id_array.indexOf(id);
         member_name_array.splice(disconnect_id,1);
         member_id_array.splice(disconnect_id,1);
