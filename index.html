@@ -318,8 +318,8 @@
         li.appendChild(text);
         ul.appendChild(li);
       });
-      socket.on("disconnecting",(nm)=>{
-        var disconnect_id = member_name_array.indexOf(nm);
+      socket.on("disconnecting",(id)=>{
+        var disconnect_id = member_id_array.indexOf(id);
         member_name_array.splice(disconnect_id,1);
         member_id_array.splice(disconnect_id,1);
         document.querySelector('#glowstick_area').innerHTML = ``;
@@ -385,7 +385,6 @@
       });
       socket.on("disconnecting",(id)=>{
         var disconnect_id = member_id_array.indexOf(id);
-        console.log(disconnect_id);
         member_name_array.splice(disconnect_id,1);
         member_id_array.splice(disconnect_id,1);
         document.querySelector('#glowstick_area').innerHTML = ``;
