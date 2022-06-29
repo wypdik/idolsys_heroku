@@ -40,7 +40,7 @@ io.on("connection", (socket)=>{
     io.emit("member-shake", nm,ttoken);
   });
   socket.on("disconnect",()=> {
-    console.log("disconnected");
+    io.emit("disconnecting", socket.id);
   });
 });
 
