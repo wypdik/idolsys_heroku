@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 3000;
 const INDEX = '/index.html';
 var member_count_server = 0;
 var member_name_array = [];
+var member_id_array= [];
 
 const server = express()
 .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
@@ -15,6 +16,7 @@ const io = socketIO(server);
 
 io.on("connection", (socket)=>{
   member_count_server ++;
+  member_id_array[member_id_array.length]=socket.id;
   console.log("ユーザーが接続しました");
 
   (()=>{
