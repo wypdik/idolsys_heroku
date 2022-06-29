@@ -39,7 +39,9 @@ io.on("connection", (socket)=>{
   socket.on("shake", (nm,ttoken)=>{
     io.emit("member-shake", nm,ttoken);
   });
-
+  socket.on("disconnect",()=> {
+    io.emit("disconnecting",socket.id);
+  });
 });
 
 
