@@ -195,6 +195,7 @@
         }
       });
       socket.on("member-color-sending", (cl,nm)=>{
+        member_color_array[nm] = cl;
         document.querySelector("#cyalume"+nm).src =color_srcs[cl];
 
       });
@@ -229,6 +230,7 @@
         console.log(id_array);
         member_name_array = nm_array;
         member_id_array = id_array;
+        member_color_array = cl_array;
         my_member_number = member_name_array.indexOf(nm.value);
         document.querySelector('#glowstick_area').innerHTML = ``;
         for(let i = 0; i < nm_array.length; i++){
