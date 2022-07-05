@@ -77,7 +77,8 @@
   var array_y = new Array(60);
   var array_z = new Array(60);
   var member_name_array = [];
-  var member_id_array =[]
+  var member_id_array =[];
+  var member_color_array =[];
   var member_count = 0;
   var my_member_number = 0;
   var name_push_count = 0;
@@ -120,7 +121,7 @@
     }
   });
   let colorSelect = document.getElementById('cyulume_color');
-  colorSelect.options[2].selected = true;
+  colorSelect.options[0].selected = true;
   let colorButton = document.getElementById('colorButton');
   colorButton.addEventListener('click', colorButtonClick);
   function colorButtonClick(){
@@ -178,15 +179,16 @@
           });
         }
       })
-      socket.on("member-name-sending", (nm_array,mb_cnt,id_array)=>{
+      socket.on("member-name-sending", (nm_array,id_array,cl_array)=>{
         console.log(nm_array);
         member_name_array = nm_array;
         member_id_array = id_array;
+        member_color_array = cl_array;
         my_member_number = member_name_array.indexOf(nm.value);
         document.querySelector('#glowstick_area').innerHTML = ``;
         for(let i = 0; i < nm_array.length; i++){
           var img_element = document.createElement('img');
-          img_element.src = 'https://1.bp.blogspot.com/-DD0J8DE44Ew/VXOULxJvZiI/AAAAAAAAuHw/F7MmGW-8NWs/s800/cyalume_light5_orange.png'; // 画像パス
+          img_element.src = color_srcs[member_color_array[i]]; // 画像パス
           img_element.id = "cyalume" + i;
           var content_area = document.getElementById("glowstick_area");
           content_area.appendChild(img_element);
@@ -222,7 +224,7 @@
 
 
       });
-      socket.on("member-name-sending", (nm_array,mb_cnt,id_array)=>{
+      socket.on("member-name-sending", (nm_array,id_array)=>{
         console.log(nm_array);
         console.log(id_array);
         member_name_array = nm_array;
@@ -231,7 +233,7 @@
         document.querySelector('#glowstick_area').innerHTML = ``;
         for(let i = 0; i < nm_array.length; i++){
           var img_element = document.createElement('img');
-          img_element.src = 'https://1.bp.blogspot.com/-DD0J8DE44Ew/VXOULxJvZiI/AAAAAAAAuHw/F7MmGW-8NWs/s800/cyalume_light5_orange.png'; // 画像パス
+          img_element.src = color_srcs[member_color_array[i]]; // 画像パス
           img_element.id = "cyalume" + i;
           var content_area = document.getElementById("glowstick_area");
           content_area.appendChild(img_element);
@@ -240,7 +242,7 @@
       socket.on("member-color-sending", (cl,nm)=>{
         console.log(cl);
         console.log(nm);
-
+        member_color_array[nm] = cl;
         document.querySelector("#cyalume"+nm).src =color_srcs[cl];
 
       });
@@ -313,7 +315,7 @@
         }
         document.querySelector("#cyalume" + member_name_array.indexOf(sendname)).animate({
           transform:["rotate(0)","rotate(45deg)"]
-        },1000);
+        },500);
 
         li.appendChild(text);
         ul.appendChild(li);
@@ -322,10 +324,11 @@
         var disconnect_id = member_id_array.indexOf(id);
         member_name_array.splice(disconnect_id,1);
         member_id_array.splice(disconnect_id,1);
+        member_color_array.splice(disconnect_id,1);
         document.querySelector('#glowstick_area').innerHTML = ``;
         for(let i = 0; i < member_name_array.length; i++){
           var img_element = document.createElement('img');
-          img_element.src = 'https://1.bp.blogspot.com/-DD0J8DE44Ew/VXOULxJvZiI/AAAAAAAAuHw/F7MmGW-8NWs/s800/cyalume_light5_orange.png'; // 画像パス
+          img_element.src = color_srcs[member_color_array[i]]; // 画像パス
           img_element.id = "cyalume" + i;
           var content_area = document.getElementById("glowstick_area");
           content_area.appendChild(img_element);
@@ -379,7 +382,7 @@
 
         document.querySelector("#cyalume"+member_name_array.indexOf(sendname)).animate({
           transform:["rotate(0)","rotate(45deg)"]
-        },1000);
+        },500);
         li.appendChild(text);
         ul.appendChild(li);
       });
@@ -387,10 +390,11 @@
         var disconnect_id = member_id_array.indexOf(id);
         member_name_array.splice(disconnect_id,1);
         member_id_array.splice(disconnect_id,1);
+        member_color_array.splice(disconnect_id,1);
         document.querySelector('#glowstick_area').innerHTML = ``;
         for(let i = 0; i < member_name_array.length; i++){
           var img_element = document.createElement('img');
-          img_element.src = 'https://1.bp.blogspot.com/-DD0J8DE44Ew/VXOULxJvZiI/AAAAAAAAuHw/F7MmGW-8NWs/s800/cyalume_light5_orange.png'; // 画像パス
+          img_element.src = color_srcs[member_color_array[i]]; // 画像パス
           img_element.id = "cyalume" + i;
           var content_area = document.getElementById("glowstick_area");
           content_area.appendChild(img_element);
