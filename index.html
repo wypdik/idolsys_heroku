@@ -267,7 +267,7 @@
             max = Math.abs(tmax) * 0.75;
             if(Math.abs(x) > max && bool == 0){
               normal_cnt ++;
-              socket.emit("shake",nm.value,ttoken);
+              socket.emit("shake",nm.value,ttoken,Math.abs(x));
               if(x > max){
                 s += "+";
               }else if(x < -max){
@@ -307,7 +307,7 @@
         }
       })
       .catch(console.error);
-      socket.on("member-shake", (sendname,token)=>{
+      socket.on("member-shake", (sendname,token,x_ac)=>{
         const ul = document.getElementById('shake_list');
         const li = document.createElement("li");
         if(nm.value === sendname){
@@ -317,7 +317,7 @@
         }
         document.querySelector("#cyalume" + member_name_array.indexOf(sendname)).animate({
           transform:["rotate(0)","rotate(45deg)"]
-        },500);
+        },500*(max/x_ac));
 
         li.appendChild(text);
         ul.appendChild(li);
@@ -348,7 +348,7 @@
         max = Math.abs(tmax) * 0.75;
         if(Math.abs(x) > max && bool == 0){
           normal_cnt ++;
-          socket.emit("shake",nm.value);
+          socket.emit("shake",nm.value,Math.abs(x));
           if(x > max){
             s += "+";
           }else if(x < -max){
@@ -373,7 +373,7 @@
         "振った回数: " + normal_cnt +"回"+"!"+s+"!<br />" +
         "更新回数:" + pick;
       });
-      socket.on("member-shake", (sendname,token)=>{
+      socket.on("member-shake", (sendname,token,x_ac)=>{
         const ul = document.getElementById('shake_list');
         const li = document.createElement("li");
         if(nm.value === sendname){
@@ -384,7 +384,7 @@
 
         document.querySelector("#cyalume"+member_name_array.indexOf(sendname)).animate({
           transform:["rotate(0)","rotate(45deg)"]
-        },500);
+        },500*(max/x_ac));
         li.appendChild(text);
         ul.appendChild(li);
       });
