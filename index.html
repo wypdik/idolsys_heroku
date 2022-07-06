@@ -264,7 +264,7 @@
             array_z[m_cnt%60] = z;
 
             m_cnt ++;
-            max = Math.abs(tmax) * 0.75;
+            max = Math.abs(tmax) * 0.8;
             if(Math.abs(x) > max && bool == 0){
               normal_cnt ++;
               socket.emit("shake",nm.value,ttoken,Math.abs(x),max);
@@ -346,7 +346,7 @@
         array_y[m_cnt%60] = y;
         array_z[m_cnt%60] = z;
         m_cnt ++;
-        max = Math.abs(tmax) * 0.75;
+        max = Math.abs(tmax) * 0.8;
         if(Math.abs(x) > max && bool == 0){
           normal_cnt ++;
           socket.emit("shake",nm.value,Math.abs(x),max);
@@ -382,9 +382,7 @@
         }else{
           var text = document.createTextNode(sendname + "が振った！");
         }
-        console.log(x_ac,m_max);
         var speed = (500*m_max/x_ac);
-        console.log(speed);
         document.querySelector("#cyalume"+member_name_array.indexOf(sendname)).animate({
           transform:["rotate(0)","rotate(45deg)"]
         },speed);
