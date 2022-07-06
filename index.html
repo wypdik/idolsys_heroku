@@ -70,7 +70,7 @@
   var m_cnt = 0;
   var pick = 0;
   var bool = 0;
-  var max = 50.00;
+  var max = 50;
   var tmax = 0;
   var m = 0;
   var array_x = new Array(60);
@@ -267,7 +267,7 @@
             max = Math.abs(tmax) * 0.75;
             if(Math.abs(x) > max && bool == 0){
               normal_cnt ++;
-              socket.emit("shake",nm.value,ttoken,Math.abs(x));
+              socket.emit("shake",nm.value,ttoken,Math.abs(x),max);
               if(x > max){
                 s += "+";
               }else if(x < -max){
@@ -307,7 +307,7 @@
         }
       })
       .catch(console.error);
-      socket.on("member-shake", (sendname,token,x_ac)=>{
+      socket.on("member-shake", (sendname,token,x_ac,m_max)=>{
         const ul = document.getElementById('shake_list');
         const li = document.createElement("li");
         if(nm.value === sendname){
@@ -315,8 +315,7 @@
         }else{
           var text = document.createTextNode(sendname + "が振った！");
         }
-        var speed = Math.trunc(500*max/x_ac);
-        console.log(speed);
+        var speed = Math.trunc(500*m_max/x_ac);
         document.querySelector("#cyalume" + member_name_array.indexOf(sendname)).animate({
           transform:["rotate(0)","rotate(45deg)"]
         },speed);
@@ -350,7 +349,7 @@
         max = Math.abs(tmax) * 0.75;
         if(Math.abs(x) > max && bool == 0){
           normal_cnt ++;
-          socket.emit("shake",nm.value,Math.abs(x));
+          socket.emit("shake",nm.value,Math.abs(x),max);
           if(x > max){
             s += "+";
           }else if(x < -max){
@@ -375,7 +374,7 @@
         "振った回数: " + normal_cnt +"回"+"!"+s+"!<br />" +
         "更新回数:" + pick;
       });
-      socket.on("member-shake", (sendname,token,x_ac)=>{
+      socket.on("member-shake", (sendname,token,x_ac,m_max)=>{
         const ul = document.getElementById('shake_list');
         const li = document.createElement("li");
         if(nm.value === sendname){
@@ -383,8 +382,8 @@
         }else{
           var text = document.createTextNode(sendname + "が振った！");
         }
-        console.log(x_ac,max);
-        var speed = (500*max/x_ac);
+        console.log(x_ac,m_max);
+        var speed = (500*m_max/x_ac);
         console.log(speed);
         document.querySelector("#cyalume"+member_name_array.indexOf(sendname)).animate({
           transform:["rotate(0)","rotate(45deg)"]
