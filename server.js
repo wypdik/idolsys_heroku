@@ -37,8 +37,8 @@ io.on("connection", (socket)=>{
     member_color_array[nm] = cl;
     io.emit("member-color-sending", cl,nm);
   });
-  socket.on("shake", (nm,ttoken,x_acceleration)=>{
-    io.emit("member-shake", nm,ttoken,x_acceleration);
+  socket.on("shake", (nm,ttoken,x_acceleration,max)=>{
+    io.emit("member-shake", nm,ttoken,x_acceleration,max);
   });
   socket.on("disconnect",(reason)=> {
     var disconnect_id = member_id_array.indexOf(socket.id);
