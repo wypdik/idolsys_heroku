@@ -317,7 +317,7 @@
         }
         document.querySelector("#cyalume" + member_name_array.indexOf(sendname)).animate({
           transform:["rotate(0)","rotate(45deg)"]
-        },parseInt(500*max/x_ac));
+        },Math.trunc(500*max/x_ac));
 
         li.appendChild(text);
         ul.appendChild(li);
@@ -384,7 +384,7 @@
         console.log(x_ac);
         document.querySelector("#cyalume"+member_name_array.indexOf(sendname)).animate({
           transform:["rotate(0)","rotate(45deg)"]
-        },parseInt(500*max/x_ac));
+        },Math.trunc(500*max/x_ac));
         li.appendChild(text);
         ul.appendChild(li);
       });
