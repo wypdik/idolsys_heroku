@@ -384,7 +384,7 @@
           var text = document.createTextNode(sendname + "が振った！");
         }
         console.log(x_ac);
-        var speed = Math.trunc(500*max/x_ac);
+        var speed = (500*max/x_ac);
         console.log(speed);
         document.querySelector("#cyalume"+member_name_array.indexOf(sendname)).animate({
           transform:["rotate(0)","rotate(45deg)"]
