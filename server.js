@@ -9,9 +9,10 @@ var member_id_array= [];
 var member_color_array= [];
 
 var app = express();
-app.use(express.static('public'));
+app.use(express.static('public');
 
-app.use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+const server = express()
+.use((req, res) => res.sendFile(INDEX, { root: __dirname }))
 .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 
