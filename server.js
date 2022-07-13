@@ -11,13 +11,13 @@ var member_color_array= [];
 var app = express();
 app.use(express.static('public'));
 
-const server = express()
+app
 .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
 .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 
 
-const io = socketIO(server);
+const io = socketIO(app);
 
 io.on("connection", (socket)=>{
 
