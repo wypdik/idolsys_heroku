@@ -8,12 +8,14 @@ var member_name_array = [];
 var member_id_array= [];
 var member_color_array= [];
 
+var app = express();
+app.use(express.static('public');
+
 const server = express()
 .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
 .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
-var app = express();
-app.use(express.static(__dirname + '/public'));
+
 
 const io = socketIO(server);
 
