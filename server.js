@@ -11,7 +11,7 @@ var member_color_array= [];
 const server = express()
 .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
 .listen(PORT, () => console.log(`Listening on ${PORT}`));
-express.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public'));
 
 const io = socketIO(server);
 
